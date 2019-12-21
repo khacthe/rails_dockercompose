@@ -1,0 +1,25 @@
+default: &default
+  adapter: mysql2
+  reconnect: true
+  encoding: utf8mb4
+  pool: 20
+  host: "localhost"
+  username: "root"
+  password: "khacthe91"
+  port: 3306
+
+development:
+  <<: *default
+  database: rails_development
+
+test:
+  <<: *default
+  database: rails_test
+
+staging:
+  <<: *default
+  database: rails_staging
+
+production:
+  <<: *default
+  database: rails_production
