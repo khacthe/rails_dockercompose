@@ -1,0 +1,30 @@
+  version: '1'
+services:
+  app:
+    build: .
+    volumes:
+      - .:/opt/webapp
+      - public-data:/opt/webapp/public
+      - tmp-data:/opt/webapp/tmp
+      - log-data:/opt/webapp/log
+    command: bash -c "rm -f tmp/pids/unicorn.pid && rake db:create && rake db:migrate && bundle exec unicorn -p 3000 -c config/unicorn.rb"
+    depends_on:
+      - db
+    tty: true
+    stdin_open: true
+  db:
+    restart:
+      always
+    image: mysql:5.7.22
+    environment:
+      - MYSQL_ROOT_PASSWORD=toor
+    volumes:
+      - ./containers/mysql/my.cnf:/etc/mysql/my.cnf
+      - db-data:/var/lib/mysql
+    ports:
+      - 43306:3306
+volumes:
+  public-data:
+  tmp-data:
+  log-data:
+  db-data:
