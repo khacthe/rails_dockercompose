@@ -1,4 +1,4 @@
-  version: '1'
+version: '2.2'
 services:
   app:
     build: .
@@ -16,10 +16,11 @@ services:
     restart:
       always
     image: mysql:5.7.22
+    container_name: db_rails_compose
     environment:
       - MYSQL_ROOT_PASSWORD=toor
     volumes:
-      - ./containers/mysql/my.cnf:/etc/mysql/my.cnf
+      - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
       - db-data:/var/lib/mysql
     ports:
       - 43306:3306

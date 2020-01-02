@@ -3,10 +3,10 @@ default: &default
   reconnect: true
   encoding: utf8mb4
   pool: 20
-  host: "localhost"
+  host: "0.0.0.0"
   username: "root"
-  password: "khacthe91"
-  port: 3306
+  password: "toor"
+  port: 43306
 
 development:
   <<: *default
